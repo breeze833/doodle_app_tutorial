@@ -1,0 +1,26 @@
+def startDrawing(e)
+  set $isDrawing to true
+  set $startX to e.offsetX
+  set $startY to e.offsetY
+end
+
+def draw(e)
+  if not $isDrawing then exit end
+  set $ctx.lineWidth to brushSize.value
+  set $ctx.strokeStyle to colorPicker.value
+  set $ctx.lineCap to 'round'
+  call $ctx.beginPath()
+  call $ctx.moveTo($startX, $startY)
+  call $ctx.lineTo(e.offsetX, e.offsetY)
+  call $ctx.stroke()
+  set $startX to e.offsetX
+  set $startY to e.offsetY
+end
+
+def stopDrawing()
+  set $isDrawing to false
+end
+
+def clearCanvas()
+  call $ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height)
+end
