@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Canvas Doole App
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(type='text/hyperscript', src='/hyperscripts/script._hs')
+    script(src='https://unpkg.com/hyperscript.org@0.9.13')
+    script(src='https://unpkg.com/htmx.org@2.0.3')
+  body
+    div(class='toolbar')
+      input(type='color', id='colorPicker', value='#000000')
+      input(type='range', id='brushSize', min='1', max='10', value='5')
+      button(id='clearCanvas', _='on click call clearCanvas()') Clear
+      button(id='uploadCanvas', _=`
+        on click
+	  set @value of #image to $canvas.toDataURL()
+	  trigger submit on #uploadForm
+      `) Upload
+      form(id='uploadForm', hx-post='/doodle/upload', hx-target='#uploadName')
+        input(id='image', type='hidden', name='image')
+      button(id='saveCanvas', _=`
+        init
+          if window.localAPI show me else hide me end
+        on click
+	  call window.localAPI.saveImage($canvas.toDataURL())
+      `) Save
+    canvas(id='drawingCanvas', _=`
+      init
+	set $canvas to me
+        set $isDrawing to false set $startX to 0 set $startY to 0
+	set $ctx to my getContext('2d')
+        set my width to window.innerWidth * 0.8
+        set my height to window.innerHeight * 0.6
+      on mousedown call startDrawing(event)
+      on mousemove call draw(event)
+      on mouseup call stopDrawing()
+      on mouseout call stopDrawing()
+    `)
+    div
+      | The canvas was uploaded to server as "
+      span(id='uploadName')
+      | "
