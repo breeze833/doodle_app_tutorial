@@ -6,6 +6,8 @@ In this version, we allow uploading the canvas to the server and saved as static
  * POST `/doodle/upload` for uploading
  * GET `/doodle/api/random/<n>` for getting a JSON list of `n` random PNG names
  * GET `/doodle/random/<n>` for getting a list of `n` random HTML IMGs based on the available PNGs
+An enhancement is also implemented:
+ * Resize canvas when the window size is changed
 
 ## Version 2
 
