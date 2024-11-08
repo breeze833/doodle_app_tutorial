@@ -42,3 +42,9 @@ html
       | The canvas was uploaded to server as "
       span(id='uploadName')
       | "
+    script(type='text/hyperscript')
+      |on resize from window
+      |  set imgdata to $ctx.getImageData(0,0,$canvas.width,$canvas.height)
+      |  set $canvas.width to window.innerWidth * 0.8
+      |  set $canvas.height to window.innerHeight * 0.6
+      |  call $ctx.putImageData(imgdata, 0,0)
