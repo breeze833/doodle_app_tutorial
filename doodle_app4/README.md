@@ -1,5 +1,11 @@
 # Demonstration of Doodle Application
 
+## Version 4
+
+We enhance the Electron client by allow the user to choose a local PNG
+and load it into the canvas. There are a few async operations involved,
+both in file loading part and rendering part. Please study the code.
+
 ## Version 3
 
 In this version, we allow uploading the canvas to the server and saved as static PNG files for later access via URL `/doodles/<png file name>`. There ar also new endpoints for serving the uploaded doodles:
