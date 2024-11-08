@@ -2,8 +2,10 @@
 
 ## Version 3
 
-Allow uploading the canvas to the server and saved as static PNG files
-for later access via URL.
+In this version, we allow uploading the canvas to the server and saved as static PNG files for later access via URL `/doodles/<png file name>`. There ar also new endpoints for serving the uploaded doodles:
+ * POST `/doodle/upload` for uploading
+ * GET `/doodle/api/random/<n>` for getting a JSON list of `n` random PNG names
+ * GET `/doodle/random/<n>` for getting a list of `n` random HTML IMGs based on the available PNGs
 
 ## Version 2
 
